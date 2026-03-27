@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HeadlineHub Dashboard</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <%- include("partials/sidebar") %>
+
+  <div class="main">
+
+    <!-- HEADER -->
+    <%- include("partials/header") %>
+
+    <section class="content">
+      <h1 class="title"><%= category %> News</h1>
+
+      <div class="cards">
+
+        <% if (articles.length === 0) { %>
+          <p>No news available</p>
+        <% } %>
+
+        <% articles.forEach(article => { %>
+          <div class="card">
+            <img src="<%= article.urlToImage || 'https://via.placeholder.com/300' %>" />
+            <div class="card-body">
+              <h3><%= article.title %></h3>
+              <p><%= article.description || "No description available" %></p>
+              <a href="<%= article.url %>" target="_blank" rel="noopener noreferrer">
+                Read More →
+              </a>
+            </div>
+          </div>
+        <% }) %>
+
+      </div>
+
+      <!-- PAGINATION INSIDE MAIN -->
+      <div class="pagination">
+
+        <% if (page > 1) { %>
+          <a href="/?category=<%= category %>&page=<%= page - 1 %>" class="load-more">
+            ← Previous
+          </a>
+        <% } %>
+
+        <span class="page-info">Page <%= page %></span>
+
+        <a href="/?category=<%= category %>&page=<%= page + 1 %>" class="load-more">
+          Next →
+        </a>
+
+      </div>
+
+    </section>
+
+  </div>
+
+</div>
+
+</body>
+</html>
