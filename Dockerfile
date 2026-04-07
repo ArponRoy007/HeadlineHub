@@ -1,5 +1,5 @@
 # Base image
-FROM node:20-alpine
+FROM node:18-alpine
 
 # Working directory
 WORKDIR /app
@@ -13,8 +13,8 @@ RUN npm ci --omit=dev
 # Copy all files
 COPY . .
 
-# Expose port (informational)
+# Expose port
 EXPOSE 3001
 
 # Start server
-CMD ["npm", "start"]
+CMD ["node", "server.js"]
